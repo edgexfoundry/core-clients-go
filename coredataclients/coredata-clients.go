@@ -60,7 +60,7 @@ func makeRequest(req *http.Request) (*http.Response, error) {
 }
 
 // Help method to decode a valuedescriptor slice
-func decodeValueDescriptorSlice(resp *http.Response) ([]models.ValueDescriptor, error) {
+func (v *ValueDescriptorClient) decodeValueDescriptorSlice(resp *http.Response) ([]models.ValueDescriptor, error) {
 	dSlice := make([]models.ValueDescriptor, 0)
 
 	dec := json.NewDecoder(resp.Body)
@@ -103,5 +103,5 @@ func (v *ValueDescriptorClient) ValueDescriptors() ([]models.ValueDescriptor, er
 		return []models.ValueDescriptor{}, errors.New(string(bodyString))
 	}
 
-	return decodeValueDescriptorSlice(resp)
+	return v.decodeValueDescriptorSlice(resp)
 }
